@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Online Education Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Section Spacing */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        /* Video Background Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 50, 100, 0.85), rgba(0, 30, 70, 0.9));
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        /* Button Styles with Advanced Animations */
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #4a6ee0, #6a11cb);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(106, 17, 203, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(0);
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(106, 17, 203, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        .btn:active {
+            transform: translateY(-2px);
+            transition: transform 0.1s;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6a11cb, #4a6ee0);
+            border-radius: 50px;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 5px 20px rgba(106, 17, 203, 0.3);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(106, 17, 203, 0.5);
+            }
+            100% {
+                box-shadow: 0 5px 20px rgba(106, 17, 203, 0.3);
+            }
+        }
+        
+        /* Courses Section with Image */
+        .courses-section {
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 50px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .courses-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .course-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-img {
+            height: 200px;
+            background-color: #4a6ee0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .course-card:hover .course-img img {
+            transform: scale(1.05);
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .course-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Features Section with Background Image */
+        .features-section {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95)), 
+                        url('course1.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .feature-box {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature-box.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #4a6ee0;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-box:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .feature-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #2c3e50, #4a6ee0);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .stat-box {
+            padding: 20px;
+            width: 100%;
+            max-width: 200px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+        
+        .stat-box.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover .stat-number {
+            transform: scale(1.1);
+            color: #ffd166;
+        }
+        
+        .stat-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Testimonials Section with Background Image */
+        .testimonials-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), 
+                        url('edulearn1.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        
+        .testimonials-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 350px;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        .testimonial-card.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .testimonial-card:nth-child(even) {
+            transform: translateX(30px);
+        }
+        
+        .testimonial-card:nth-child(even).animated {
+            transform: translateX(0);
+        }
+        
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #f1f1f1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #4a6ee0;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #4a6ee0, #6a11cb);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .cta-content.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .cta-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Learning Path Section */
+        .learning-path-section {
+            background-color: #f0f7ff;
+        }
+        
+        .path-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .path-step {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .path-step.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .path-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4a6ee0, #6a11cb);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            transition: all 0.5s ease;
+        }
+        
+        .path-step:hover .step-number {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        /* Instructor Section (New Section) */
+        .instructor-section {
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .instructor-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        
+        .instructor-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .instructor-img.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .instructor-img img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease;
+        }
+        
+        .instructor-img:hover img {
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .instructor-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            text-align: left;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease 0.2s;
+        }
+        
+        .instructor-content.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .instructor-content h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .instructor-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Section Reveal Animations */
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .section-reveal.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 1000px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .instructor-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .instructor-content {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero-section {
+                min-height: 600px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.9rem;
+            }
+            
+            .courses-container,
+            .features-container,
+            .stats-container,
+            .testimonials-container,
+            .path-container {
+                gap: 25px;
+            }
+            
+            .course-card,
+            .feature-box,
+            .testimonial-card,
+            .path-step {
+                max-width: 100%;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .features-section,
+            .testimonials-section {
+                background-attachment: scroll;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .instructor-img,
+            .instructor-content {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Ensure no horizontal scroll and centered content */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-section">
+        <video autoplay muted loop class="video-background">
+            <source src="onlineedu1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Learn Without Limits</h1>
+                <p>Join over 2 million learners worldwide and gain access to the world's best online courses from top universities and industry leaders.</p>
+                <a href="4042.html" class="btn btn-pulse">Start Learning Free</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Courses Section with Images -->
+    <section class="courses-section">
+        <div class="container">
+            <h2 class="section-title section-reveal">Explore Popular Courses</h2>
+            <p class="section-subtitle section-reveal">Choose from hundreds of courses from specialist organizations</p>
+            
+            <div class="courses-container">
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="online1.webp" alt="Web Development">
+                    </div>
+                    <div class="course-content">
+                        <h3>Web Development Bootcamp</h3>
+                        <p>Master HTML, CSS, JavaScript, React, Node.js and build real-world projects. Perfect for beginners.</p>
+                        <a href="4042.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="online2.webp" alt="Data Science">
+                    </div>
+                    <div class="course-content">
+                        <h3>Data Science & <br> Analytics</h3>
+                        <p>Learn Python, machine learning, statistical analysis, and data visualization techniques.</p>
+                        <a href="4042.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="online3.webp" alt="UI/UX Design">
+                    </div>
+                    <div class="course-content">
+                        <h3>UI/UX Design <br> Masterclass</h3>
+                        <p>Design beautiful and functional user interfaces with Figma, Adobe XD, and user research methods.</p>
+                        <a href="4042.html" class="btn">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section with Background Image -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title section-reveal">Why Learn With Us?</h2>
+            <p class="section-subtitle section-reveal">We provide the best online learning experience with cutting-edge features</p>
+            
+            <div class="features-container">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Self-Paced <br> Learning</h3>
+                    <p>Learn at your own pace with lifetime access to course materials and resources.</p>
+                    <a href="4042.html" class="btn">Learn More</a>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Industry Recognized Certificates</h3>
+                    <p>Earn certificates that you can share with potential employers and your professional network.</p>
+                    <a href="4042.html" class="btn">Learn More</a>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Interactive <br> Community</h3>
+                    <p>Join discussion forums, study groups, and get help from mentors and fellow learners.</p>
+                    <a href="4042.html" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title section-reveal" style="color: whitesmoke;">Our Impact in Numbers</h2>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-text">LearnersWorldwide</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-text">Expert Instructors</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-text">Courses Available</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-text">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section with Background Image -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title section-reveal" style="color: whitesmoke;">What Our Students Say</h2>
+            <p class="section-subtitle section-reveal">Hear from our global community of learners</p>
+            
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The courses here transformed my career. I went from a marketing assistant to a data analyst in just 6 months!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="student1.webp" alt="Jessica Smith">
+                        </div>
+                        <div>
+                            <h4>Jessica Smith</h4>
+                            <p>Data Analyst</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The quality of instruction is exceptional. The interactive assignments made complex topics easy to understand."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="study.webp" alt="Michael Rodriguez">
+                        </div>
+                        <div>
+                            <h4>Michael Rodriguez</h4>
+                            <p>Web Developer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Flexible learning schedule allowed me to balance my full-time job while upskilling for a promotion."
+                    </div> <br>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="live4.webp" alt="Anna Kumar">
+                        </div>
+                        <div>
+                            <h4>Anna Kumar</h4>
+                            <p>Product Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Learning Path Section -->
+    <section class="learning-path-section">
+        <div class="container">
+            <h2 class="section-title section-reveal">Your Learning Journey</h2>
+            <p class="section-subtitle section-reveal">Follow a structured path to achieve your learning goals</p>
+            
+            <div class="path-container">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <h3>Choose Your Path</h3>
+                    <p>Select from career tracks, skill specializations, or degree programs.</p>
+                    <a href="4042.html" class="btn">Explore</a>
+                </div>
+                
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <h3>Learn by Doing</h3>
+                    <p>Practice with interactive exercises, projects, and real-world scenarios.</p>
+                    <a href="4042.html" class="btn">Explore</a>
+                </div>
+                
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <h3>Get Feedback</h3>
+                    <p>Receive personalized feedback from mentors and peer reviews.</p> 
+                    <a href="4042.html" class="btn">Explore</a>
+                </div>
+                
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <h3>Earn & Apply</h3>
+                    <p>Get certified and apply your new skills to advance your career.</p>
+                    <a href="4042.html" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Instructor Section (New Section) -->
+    <section class="instructor-section">
+        <div class="container">
+            <h2 class="section-title section-reveal">Learn From Industry Experts</h2>
+            <p class="section-subtitle section-reveal">Our instructors are top professionals from leading tech companies</p>
+            
+            <div class="instructor-container">
+                <div class="instructor-img">
+                    <img src="live1.webp" alt="Instructor">
+                </div>
+                <div class="instructor-content">
+                    <h3>Meet Our Lead Instructor</h3>
+                    <p>Dr. Sarah Johnson has over 15 years of experience in software development and data science. She previously worked at Google and Microsoft, and has taught thousands of students worldwide.</p>
+                    <p>Her teaching philosophy focuses on practical, project-based learning that prepares students for real-world challenges.</p>
+                    <a href="4042.html" class="btn">View All Instructors</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Start Learning Today</h2>
+                <p>Join millions of people learning on the world's largest online education platform. No prior experience required.</p>
+                <a href="4042.html" class="btn btn-pulse">Get Started For Free</a>
+            </div>
+        </div>
+    </section>
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+
+    <script>
+
+        // Load header
+  fetch('header2.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header-placeholder').innerHTML = data;
+
+      // Header Interactions
+      const menuBtn = document.querySelector('.menu-btn');
+      const homeArrow = document.querySelector('.home-link span');
+
+      menuBtn?.addEventListener('click', () => {
+        document.getElementById('navBar').classList.toggle('active');
+      });
+
+      homeArrow?.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const li = event.target.closest('li');
+        li.classList.toggle('show-submenu');
+      });
+    });
+
+  // Load footer
+  fetch('footer2.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-placeholder').innerHTML = data;
+
+      // Subscribe button JS (after footer is loaded)
+      const subscribeBtn = document.getElementById('subscribeButton');
+      const emailInput = document.getElementById('newsletterEmail');
+      const emailError = document.getElementById('emailError');
+
+      subscribeBtn?.addEventListener('click', function(e) {
+        const email = emailInput.value.trim();
+        const valid = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+        if (valid.test(email)) {
+          // Redirect to 404error.html only if email is valid
+          window.location.href = '4042.html';
+        } else {
+          e.preventDefault();
+          emailError.style.display = 'block';
+          emailInput.style.border = '2px solid #ff7a00';
+        }
+      });
+
+      emailInput?.addEventListener('input', function() {
+        emailError.style.display = 'none';
+        emailInput.style.border = 'none';
+      });
+    });
+
+  // Animate service boxes on scroll
+  const serviceBoxes = document.querySelectorAll('.service-box');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, index) => {
+      if(entry.isIntersecting){
+        entry.target.style.animation = `fadeInUp 0.8s forwards`;
+        entry.target.style.animationDelay = `${index * 0.2}s`;
+      }
+    });
+  }, {threshold:0.2});
+  serviceBoxes.forEach(box => observer.observe(box));
+  
+        // Scroll animation function
+function scrollAnimation() {
+    const elements = document.querySelectorAll('.section-reveal, .course-card, .feature-box, .stat-box, .testimonial-card, .path-step, .cta-content, .instructor-img, .instructor-content');
+    
+    elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+        
+        if (elementPosition < screenPosition) {
+            element.classList.add('animated');
+        } else {
+            // Remove the class when scrolling up for re-triggering animations
+            if (window.scrollY < lastScrollY) {
+                element.classList.remove('animated');
+            }
+        }
+    });
+    
+    lastScrollY = window.scrollY;
+}
+
+let lastScrollY = window.scrollY;
+
+// Initialize animations on page load
+window.addEventListener('DOMContentLoaded', () => {
+    // Initial check for elements in view
+    scrollAnimation();
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', scrollAnimation);
+    
+    // Button click handler for all buttons with enhanced animation
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Add a ripple effect
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.7);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                top: ${y}px;
+                left: ${x}px;
+                pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+            
+            // REDIRECT TO 4042.html AFTER A SMALL DELAY FOR ANIMATION
+            setTimeout(() => {
+                window.location.href = '4042.html';
+            }, 300);
+        });
+    });
+    
+    // Add CSS for ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+    </script>
+</body>
+</html>

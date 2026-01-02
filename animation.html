@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSphere Pro - Next Gen Online Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* ===== SECTION HEADER STYLES ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 15px;
+        }
+
+        .section-tag {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #60a5fa;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 30px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, #60a5fa, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        /* ===== ANIMATION CLASSES ===== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== BUTTON STYLES ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            margin: 10px 5px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        /* ===== SECTION 1: HERO ===== */
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 120px 0;
+            width: 100%;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .hero-tag {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #60a5fa;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: inline-block;
+            padding: 10px 25px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 30px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #60a5fa, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .hero-testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: white;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .rating-stars {
+            color: #fbbf24;
+            font-size: 1.4rem;
+            letter-spacing: 5px;
+        }
+
+        .rating-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* === SECTION 2: IMMERSIVE LEARNING === */
+        .immersive-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0;
+            width: 100%;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 15%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+        }
+
+        .immersive-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .immersive-image {
+            height: 600px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .immersive-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('live1.webp') center/cover;
+            border-radius: 20px;
+        }
+
+        .immersive-features {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ===== SECTION 3: COURSES ===== */
+        .courses-section {
+            padding: 120px 0;
+            background: #0f172a;
+            width: 100%;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .course-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-15px);
+            border-color: #3b82f6;
+            box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
+        }
+
+        .course-image {
+            height: 250px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .course-category {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .course-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #f8fafc;
+            line-height: 1.3;
+        }
+
+        .course-description {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        /* ===== SECTION 4: STATS ===== */
+        .stats-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 40px 20px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #3b82f6;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        /* ===== SECTION 5: HOW IT WORKS ===== */
+        .process-section {
+            padding: 120px 0;
+            background: #0f172a;
+            width: 100%;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-step {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            padding: 60px 30px 40px;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ===== SECTION 6: TESTIMONIALS ===== */
+        .testimonials-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            width: 100%;
+        }
+
+        .testimonials-container {
+            position: relative;
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .testimonial-slide {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: #60a5fa;
+            transform: scale(1.3);
+        }
+
+        /* ===== SECTION 7: FAQ ===== */
+        .faq-section {
+            padding: 120px 0;
+            background: #0f172a;
+            width: 100%;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            line-height: 1.4;
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .faq-answer.active {
+            padding: 0 30px 25px;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            color: #3b82f6;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+
+        .faq-toggle.active {
+            transform: rotate(45deg);
+        }
+
+        /* ===== SECTION 8: CTA ===== */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .cta-content {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 30px;
+            padding: 80px 60px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .rotate-in {
+            animation: rotateIn 1s ease-out;
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotateY(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .stats-grid,
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .stat-item,
+            .process-step {
+                margin-bottom: 40px;
+                min-height: 220px;
+            }
+            
+            .stat-item:last-child,
+            .process-step:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-section, 
+            .immersive-section,
+            .courses-section,
+            .stats-section,
+            .process-section,
+            .testimonials-section,
+            .faq-section,
+            .cta-section {
+                padding: 100px 0;
+            }
+            
+            .hero-title {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+            
+            .immersive-content {
+                gap: 60px;
+            }
+            
+            .immersive-image {
+                height: 500px;
+            }
+            
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .stat-item,
+            .process-step {
+                padding: 35px 20px;
+            }
+            
+            .faq-item {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .immersive-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .immersive-image {
+                height: 400px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .section-header {
+                margin-bottom: 50px;
+            }
+            
+            .cta-content {
+                padding: 70px 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section, 
+            .immersive-section,
+            .courses-section,
+            .stats-section,
+            .process-section,
+            .testimonials-section,
+            .faq-section,
+            .cta-section {
+                padding: 80px 0;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero-title {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin: 5px 0;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-top: 50px;
+            }
+            
+            .section-title {
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+                margin-bottom: 15px;
+            }
+            
+            .section-description {
+                font-size: 1.1rem;
+                line-height: 1.7;
+            }
+            
+            .course-card,
+            .stat-item,
+            .process-step {
+                padding: 30px 25px;
+            }
+            
+            .course-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            
+            .testimonial-slide {
+                padding: 35px 25px;
+            }
+            
+            .cta-content {
+                padding: 50px 35px;
+            }
+            
+            .hero-testimonial {
+                padding: 30px 25px;
+            }
+            
+            .feature-item {
+                gap: 15px;
+            }
+            
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .process-step {
+                padding: 50px 25px 30px;
+                min-height: 250px;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+                margin-bottom: 15px;
+            }
+            
+            .stats-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-top: 50px;
+            }
+            
+            .stat-item,
+            .process-step {
+                margin-bottom: 30px;
+                min-height: 180px;
+            }
+            
+            .stat-item:last-child,
+            .process-step:last-child {
+                margin-bottom: 0;
+            }
+            
+            .faq-container {
+                margin-top: 50px;
+            }
+            
+            .faq-item {
+                margin-bottom: 15px;
+            }
+            
+            .faq-question {
+                padding: 22px 25px;
+                font-size: 1.05rem;
+            }
+            
+            .faq-answer.active {
+                padding: 0 25px 22px;
+            }
+            
+            .section-header {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .stat-item {
+                padding: 30px 20px;
+                min-height: 170px;
+            }
+            
+            .process-step {
+                padding: 45px 20px 25px;
+                min-height: 230px;
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+            
+            .course-content {
+                padding: 25px;
+            }
+            
+            .faq-question {
+                padding: 20px 22px;
+            }
+            
+            .faq-answer.active {
+                padding: 0 22px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section, 
+            .immersive-section,
+            .courses-section,
+            .stats-section,
+            .process-section,
+            .testimonials-section,
+            .faq-section,
+            .cta-section {
+                padding: 60px 0;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .section-header {
+                margin-bottom: 40px;
+                padding: 0 10px;
+            }
+            
+            .hero-title {
+                font-size: clamp(1.8rem, 8vw, 2.8rem);
+                padding: 0 10px;
+                margin-bottom: 20px;
+            }
+            
+            .hero-buttons {
+                gap: 12px;
+                padding: 0 5px;
+                margin-bottom: 40px;
+            }
+            
+            .btn {
+                padding: 14px 25px;
+                font-size: 0.95rem;
+            }
+            
+            .rating-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .testimonial-text {
+                font-size: 1.1rem;
+                line-height: 1.5;
+            }
+            
+            .courses-grid {
+                gap: 20px;
+                margin-top: 40px;
+            }
+            
+            .course-card {
+                margin: 0;
+                padding: 25px 20px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+                margin-bottom: 12px;
+            }
+            
+            .stat-label {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+                line-height: 1.4;
+            }
+            
+            .faq-question {
+                padding: 20px;
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+            
+            .faq-answer.active {
+                padding: 0 20px 20px;
+            }
+            
+            .cta-content {
+                padding: 40px 25px;
+            }
+            
+            .immersive-image {
+                height: 300px;
+            }
+            
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .feature-icon {
+                margin: 0 auto;
+            }
+            
+            .testimonial-slide {
+                padding: 30px 22px;
+            }
+            
+            .slider-nav {
+                margin-top: 30px;
+            }
+            
+            .process-step {
+                padding: 45px 20px 25px;
+                min-height: 220px;
+            }
+            
+            .step-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .stats-grid,
+            .process-steps {
+                gap: 25px;
+                margin-top: 40px;
+            }
+            
+            .stat-item,
+            .process-step {
+                margin-bottom: 25px;
+                min-height: 160px;
+            }
+            
+            .stat-item:last-child,
+            .process-step:last-child {
+                margin-bottom: 0;
+            }
+            
+            .faq-container {
+                margin-top: 40px;
+            }
+            
+            .section-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .course-description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .stat-item {
+                padding: 25px 15px;
+                min-height: 150px;
+            }
+            
+            .process-step {
+                padding: 40px 15px 20px;
+                min-height: 200px;
+            }
+            
+            .course-card {
+                padding: 20px 15px;
+            }
+            
+            .course-content {
+                padding: 20px 15px;
+            }
+            
+            .faq-question {
+                padding: 18px 20px;
+                font-size: 0.95rem;
+            }
+            
+            .faq-answer.active {
+                padding: 0 20px 18px;
+                font-size: 0.95rem;
+            }
+            
+            .cta-content {
+                padding: 35px 20px;
+            }
+            
+            .stat-number {
+                font-size: 2.3rem;
+            }
+            
+            .stat-label {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .hero-title {
+                font-size: clamp(1.6rem, 8vw, 2.4rem);
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .course-content {
+                padding: 15px;
+            }
+            
+            .course-title {
+                font-size: 1.3rem;
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .feature-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .stat-item {
+                padding: 20px 12px;
+                min-height: 140px;
+            }
+            
+            .process-step {
+                padding: 35px 12px 15px;
+                min-height: 180px;
+            }
+            
+            .faq-question {
+                padding: 16px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .faq-answer.active {
+                padding: 0 18px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Equal spacing utility */
+        .equal-spacing {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .equal-spacing > * {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header-placeholder"></div>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero-section" id="hero">
+        <video autoplay muted loop id="hero-video">
+            <source src="onlineedu1.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag animate-on-scroll">Transform Your Future</div>
+                <h1 class="hero-title animate-on-scroll">
+                    Master In-Demand<br>Skills Through<br>Immersive Online<br>Education
+                </h1>
+                <p class="hero-description animate-on-scroll">
+                    Join 50,000+ learners worldwide who are<br>
+                    transforming their careers with our AI-powered<br>
+                    platform. Experience personalized learning<br>
+                    paths, live mentorship, and hands-on projects<br>
+                    that deliver real results.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="4042.html" class="btn btn-pulse animate-left">
+                        Start Free Trial <i class="fas fa-rocket"></i>
+                    </a>
+                    <a href="4042.html" class="btn btn-outline animate-right">
+                        Explore Courses <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+                
+                <div class="hero-testimonial animate-scale">
+                    <p class="testimonial-text">
+                        "EduSphere Pro helped me transition from marketing to software development 
+                        in just 6 months. The hands-on projects were exactly what employers were looking for!"
+                    </p>
+                    <div class="rating-container">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-text">4.8/5.0 Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: IMMERSIVE LEARNING -->
+    <section class="immersive-section" id="immersive">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Immersive Experience</div>
+                <h2 class="section-title">Learn in <span>Virtual Worlds</span></h2>
+                <p class="section-description">
+                    Step into our virtual learning environments<br>
+                    where concepts come to life. From<br>
+                    interactive 3D models to simulated real-<br>
+                    world scenarios, experience education like<br>
+                    never before.
+                </p>
+            </div>
+            
+            <div class="immersive-content">
+                <div class="immersive-image rotate-in animate-left"></div>
+                
+                <div class="immersive-text">
+                    <div class="immersive-features">
+                        <div class="feature-item stagger-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-vr-cardboard"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin-bottom: 10px; color: #f8fafc;">VR & AR Integration</h3>
+                                <p style="color: #94a3b8; line-height: 1.6;">Learn complex subjects through immersive virtual and augmented reality experiences.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item stagger-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin-bottom: 10px; color: #f8fafc;">Live Collaboration</h3>
+                                <p style="color: #94a3b8; line-height: 1.6;">Work with peers and instructors in real-time virtual classrooms and labs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item stagger-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin-bottom: 10px; color: #f8fafc;">Gamified Learning</h3>
+                                <p style="color: #94a3b8; line-height: 1.6;">Earn points, badges, and level up as you master new skills and complete challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: COURSES -->
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Popular Courses</div>
+                <h2 class="section-title">Master <span>High-Demand Skills</span></h2>
+                <p class="section-description">
+                    Choose from our extensive catalog of<br>
+                    industry-relevant courses taught by leading<br>
+                    experts and practitioners.
+                </p>
+            </div>
+            
+            <div class="courses-grid">
+                <div class="course-card animate-left stagger-item">
+                    <div class="course-image" style="background-image: url('edulearn1.webp');">
+                        <div class="course-category">Web Development</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Full Stack Web Development</h3>
+                        <p class="course-description">
+                            Master modern web development with<br>
+                            React, Node.js, and databases. Build<br>
+                            full-stack applications from scratch.
+                        </p>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 120 Hours</span>
+                            <span><i class="fas fa-signal"></i> Beginner to Advanced</span>
+                        </div>
+                        <a href="4042.html" class="btn" style="margin-top: 20px; padding: 12px 30px; font-size: 0.9rem;">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="course-card animate-on-scroll stagger-item">
+                    <div class="course-image" style="background-image: url('edulearn2.webp');">
+                        <div class="course-category">Data Science</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Data Science & Machine Learning</h3>
+                        <p class="course-description">
+                            Learn Python, statistical analysis, and<br>
+                            ML algorithms. Work with real datasets<br>
+                            and build predictive models.
+                        </p>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 160 Hours</span>
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                        </div>
+                        <a href="4042.html" class="btn" style="margin-top: 20px; padding: 12px 30px; font-size: 0.9rem;">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="course-card animate-right stagger-item">
+                    <div class="course-image" style="background-image: url('edulearn3.webp');">
+                        <div class="course-category">UX/UI Design</div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">UI/UX Design Mastery</h3>
+                        <p class="course-description">
+                            Master user-centered design principles,<br>
+                            prototyping, and usability testing. Create<br>
+                            stunning digital experiences.
+                        </p>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 90 Hours</span>
+                            <span><i class="fas fa-signal"></i> All Levels</span>
+                        </div>
+                        <a href="4042.html" class="btn" style="margin-top: 20px; padding: 12px 30px; font-size: 0.9rem;">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: STATS -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Our Impact</div>
+                <h2 class="section-title">Proven <span>Results & Growth</span></h2>
+                <p class="section-description">
+                    Join a community of learners who have<br>
+                    transformed their careers with our platform.
+                </p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item animate-left stagger-item">
+                    <div class="stat-number" data-count="50000">0</div>
+                    <div class="stat-label">Active<br>Learners</div>
+                </div>
+                
+                <div class="stat-item animate-on-scroll stagger-item">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">Completion<br>Rate</div>
+                </div>
+                
+                <div class="stat-item animate-on-scroll stagger-item">
+                    <div class="stat-number" data-count="1200">0</div>
+                    <div class="stat-label">Expert<br>Mentors</div>
+                </div>
+                
+                <div class="stat-item animate-right stagger-item">
+                    <div class="stat-number" data-count="85">0</div>
+                    <div class="stat-label">Career<br>Advancement</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: HOW IT WORKS -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Learning Journey</div>
+                <h2 class="section-title">How It <span>Works</span></h2>
+                <p class="section-description">
+                    Follow our proven 4-step methodology<br>
+                    designed for maximum learning efficiency.
+                </p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step animate-left stagger-item">
+                    <div class="step-number">01</div>
+                    <h3 style="margin-bottom: 15px; color: #f8fafc; line-height: 1.3;">Assessment & Planning</h3>
+                    <p style="color: #94a3b8; line-height: 1.6;">
+                        Start with a skills assessment to create your<br>
+                        personalized learning roadmap tailored to your<br>
+                        goals.
+                    </p>
+                </div>
+                
+                <div class="process-step animate-on-scroll stagger-item">
+                    <div class="step-number">02</div>
+                    <h3 style="margin-bottom: 15px; color: #f8fafc; line-height: 1.3;">Interactive Learning</h3>
+                    <p style="color: #94a3b8; line-height: 1.6;">
+                        Engage with video lessons, coding exercises,<br>
+                        and interactive quizzes with instant feedback.
+                    </p>
+                </div>
+                
+                <div class="process-step animate-on-scroll stagger-item">
+                    <div class="step-number">03</div>
+                    <h3 style="margin-bottom: 15px; color: #f8fafc; line-height: 1.3;">Project Building</h3>
+                    <p style="color: #94a3b8; line-height: 1.6;">
+                        Apply your skills by building real-world projects<br>
+                        that become part of your professional portfolio.
+                    </p>
+                </div>
+                
+                <div class="process-step animate-right stagger-item">
+                    <div class="step-number">04</div>
+                    <h3 style="margin-bottom: 15px; color: #f8fafc; line-height: 1.3;">Career Launch</h3>
+                    <p style="color: #94a3b8; line-height: 1.6;">
+                        Get career coaching, resume reviews, and<br>
+                        interview preparation to land your dream job.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: TESTIMONIALS -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Success Stories</div>
+                <h2 class="section-title">What Our <span>Students Say</span></h2>
+                <p class="section-description">
+                    Hear from learners who have transformed<br>
+                    their careers with EduSphere Pro.
+                </p>
+            </div>
+            
+            <div class="testimonials-container">
+                <div class="testimonial-slide active animate-scale">
+                    <p class="testimonial-text" style="font-size: 1.4rem; color: white; line-height: 1.6;">
+                        "The hands-on projects were game-changers. Instead of just theory, 
+                        I built actual applications that became the centerpiece of my portfolio and 
+                        helped me secure multiple job offers."
+                    </p>
+                    <div style="margin-top: 30px;">
+                        <div style="font-weight: 600; font-size: 1.2rem; line-height: 1.3;">— Michael Rodriguez</div>
+                        <div style="opacity: 0.8; margin-top: 5px; line-height: 1.4;">UX Designer at CreativeStudio</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-slide animate-scale">
+                    <p class="testimonial-text" style="font-size: 1.4rem; color: white; line-height: 1.6;">
+                        "I doubled my salary within 8 months of completing the Full Stack course. 
+                        The project-based approach gave me the confidence to tackle real-world 
+                        development challenges."
+                    </p>
+                    <div style="margin-top: 30px;">
+                        <div style="font-weight: 600; font-size: 1.2rem; line-height: 1.3;">— Alex Morgan</div>
+                        <div style="opacity: 0.8; margin-top: 5px; line-height: 1.4;">Senior Developer at TechCorp</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-slide animate-scale">
+                    <p class="testimonial-text" style="font-size: 1.4rem; color: white; line-height: 1.6;">
+                        "As a working mom, the flexible schedule was crucial. I could learn at 
+                        my own pace while balancing family responsibilities. The mentorship 
+                        program was invaluable."
+                    </p>
+                    <div style="margin-top: 30px;">
+                        <div style="font-weight: 600; font-size: 1.2rem; line-height: 1.3;">— Sarah Chen</div>
+                        <div style="opacity: 0.8; margin-top: 5px; line-height: 1.4;">Data Scientist at AnalyticsPro</div>
+                    </div>
+                </div>
+                
+                <div class="slider-nav">
+                    <div class="slider-dot active" data-slide="0"></div>
+                    <div class="slider-dot" data-slide="1"></div>
+                    <div class="slider-dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Need Help?</div>
+                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+                <p class="section-description">
+                    Find quick answers to common questions<br>
+                    about our platform and courses.
+                </p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item animate-left stagger-item">
+                    <div class="faq-question">
+                        <span style="flex-grow: 1;">How much time do I need to commit each week?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Most students spend 10-15 hours per week. However, our platform is 
+                        flexible and you can learn at your own pace. We recommend consistency 
+                        over intensity for best results.
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-on-scroll stagger-item">
+                    <div class="faq-question">
+                        <span style="flex-grow: 1;">Do you offer certificates upon completion?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! All courses include a verified certificate of completion that 
+                        you can add to LinkedIn and your resume. We also offer industry-recognized 
+                        certifications for advanced programs.
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-on-scroll stagger-item">
+                    <div class="faq-question">
+                        <span style="flex-grow: 1;">What kind of support is available?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        You'll have access to instructor support via discussion forums, weekly 
+                        Q&A sessions, 1:1 mentorship, and a community of fellow learners. Our 
+                        average response time is under 6 hours.
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-right stagger-item">
+                    <div class="faq-question">
+                        <span style="flex-grow: 1;">Can I access course materials after completion?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! You get lifetime access to all course materials, including future 
+                        updates. You can revisit the content anytime and stay current with 
+                        industry developments.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: CTA -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <div class="cta-content animate-scale">
+                <div class="section-tag">Start Your Journey</div>
+                <h2 class="section-title" style="color: #f8fafc; line-height: 1.2;">Ready to Transform <span>Your Career?</span></h2>
+                <p class="section-description" style="max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
+                    Join thousands of successful learners<br>
+                    who have accelerated their careers<br>
+                    with EduSphere Pro. Your future in<br>
+                    tech starts here.
+                </p>
+                
+                <div style="margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                    <a href="4042.html" class="btn btn-pulse animate-left">
+                        <i class="fas fa-graduation-cap"></i> Start Free Trial
+                    </a>
+                    <a href="4042.html" class="btn btn-outline animate-right">
+                        <i class="fas fa-play-circle"></i> View All Courses
+                    </a>
+                </div>
+                
+                <p style="margin-top: 30px; color: #94a3b8; font-size: 0.9rem; line-height: 1.4;">
+                    No credit card required • 14-day free trial • Cancel anytime
+                </p>
+            </div>
+        </div>
+    </section>
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+
+    <script>
+        // Load header
+        fetch('header2.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+
+                // Header Interactions
+                const menuBtn = document.querySelector('.menu-btn');
+                const homeArrow = document.querySelector('.home-link span');
+
+                menuBtn?.addEventListener('click', () => {
+                    document.getElementById('navBar').classList.toggle('active');
+                });
+
+                homeArrow?.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const li = event.target.closest('li');
+                    li.classList.toggle('show-submenu');
+                });
+            });
+
+        // Load footer
+        fetch('footer2.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+
+                // Subscribe button JS (after footer is loaded)
+                const subscribeBtn = document.getElementById('subscribeButton');
+                const emailInput = document.getElementById('newsletterEmail');
+                const emailError = document.getElementById('emailError');
+
+                subscribeBtn?.addEventListener('click', function(e) {
+                    const email = emailInput.value.trim();
+                    const valid = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+                    if (valid.test(email)) {
+                        // Redirect to 404error.html only if email is valid
+                        window.location.href = '4042.html';
+                    } else {
+                        e.preventDefault();
+                        emailError.style.display = 'block';
+                        emailInput.style.border = '2px solid #ff7a00';
+                    }
+                });
+
+                emailInput?.addEventListener('input', function() {
+                    emailError.style.display = 'none';
+                    emailInput.style.border = 'none';
+                });
+            });
+
+        // ===== INITIALIZE ON PAGE LOAD =====
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('EduSphere Pro Platform Initialized');
+            
+            // Initialize all components
+            initScrollAnimations();
+            initTestimonialSlider();
+            initFAQAccordion();
+            initCounterAnimation();
+            initButtonActions();
+            
+            // Initial check for visible elements
+            checkVisibleElements();
+        });
+
+        // ===== SCROLL ANIMATIONS =====
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Add staggered delay for stagger items
+                        if (entry.target.classList.contains('stagger-item')) {
+                            const index = Array.from(entry.target.parentElement.children).indexOf(entry.target);
+                            entry.target.style.transitionDelay = `${index * 0.1}s`;
+                        }
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            // Observe all animated elements
+            const animatedElements = document.querySelectorAll(
+                '.animate-on-scroll, .animate-left, .animate-right, .animate-scale, .stagger-item'
+            );
+            
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        function checkVisibleElements() {
+            const animatedElements = document.querySelectorAll(
+                '.animate-on-scroll, .animate-left, .animate-right, .animate-scale, .stagger-item'
+            );
+            
+            animatedElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = (
+                    rect.top < window.innerHeight * 0.9 &&
+                    rect.bottom > 0
+                );
+                
+                if (isVisible && !el.classList.contains('visible')) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // ===== TESTIMONIAL SLIDER =====
+        function initTestimonialSlider() {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show current slide and activate dot
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            // Dot click events
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+            
+            // Auto-advance slider
+            setInterval(() => {
+                let nextSlide = (currentSlide + 1) % totalSlides;
+                showSlide(nextSlide);
+            }, 5000);
+        }
+
+        // ===== FAQ ACCORDION =====
+        function initFAQAccordion() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const answer = faqItem.querySelector('.faq-answer');
+                    const toggle = faqItem.querySelector('.faq-toggle');
+                    
+                    // Close all other FAQs
+                    document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+                        if (otherAnswer !== answer) {
+                            otherAnswer.classList.remove('active');
+                            otherAnswer.parentElement.querySelector('.faq-toggle').classList.remove('active');
+                            otherAnswer.parentElement.querySelector('.faq-toggle').textContent = '+';
+                        }
+                    });
+                    
+                    // Toggle current FAQ
+                    answer.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                    toggle.textContent = answer.classList.contains('active') ? '−' : '+';
+                });
+            });
+        }
+
+        // ===== COUNTER ANIMATION =====
+        function initCounterAnimation() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        const increment = target / speed;
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            if (current < target) {
+                                current += increment;
+                                counter.textContent = Math.ceil(current);
+                                setTimeout(updateCounter, 1);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        
+                        updateCounter();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        }
+
+        // ===== BUTTON ACTIONS =====
+        function initButtonActions() {
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
+                        return; // Allow anchor links to work
+                    }
+                    
+                    if (this.getAttribute('href') === '404.html') {
+                        e.preventDefault();
+                        
+                        // Button animation
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 200);
+                        
+                        // Show loading state
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                        this.style.cursor = 'wait';
+                        
+                        // Redirect to 404.html
+                        setTimeout(() => {
+                            window.location.href = '404.html';
+                        }, 800);
+                    }
+                });
+            });
+        }
+
+        // ===== VIDEO PLAYBACK =====
+        const heroVideo = document.getElementById('hero-video');
+        if (heroVideo) {
+            heroVideo.playbackRate = 0.8;
+        }
+
+        // ===== SCROLL EVENT LISTENER =====
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    checkVisibleElements();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ===== RESPONSIVE ADJUSTMENTS =====
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.animate-left, .animate-right').forEach(el => {
+                    el.style.transform = 'translateY(40px)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
